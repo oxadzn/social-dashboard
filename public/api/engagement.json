@@ -1,0 +1,9 @@
+[
+  { "date": "2026-11-06", "likes": 1120, "comments": 160, "shares": 70 },
+  { "date": "2026-11-07", "likes": 1340, "comments": 185, "shares": 88 },
+  { "date": "2026-11-08", "likes": 980,  "comments": 140, "shares": 61 },
+  { "date": "2026-11-09", "likes": 1410, "comments": 201, "shares": 99 },
+  { "date": "2026-11-10", "likes": 1290, "comments": 175, "shares": 90 },
+  { "date": "2026-11-11", "likes": 1330, "comments": 230, "shares": 120 },
+  { "date": "2026-11-12", "likes": 1450, "comments": 213, "shares": 114 }
+]

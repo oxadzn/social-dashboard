@@ -1,0 +1,6 @@
+[
+  { "id": "followers", "label": "Followers", "value": 12480, "change": 3.2 },
+  { "id": "likes", "label": "Likes", "value": 8920, "change": 5.1 },
+  { "id": "comments", "label": "Comments", "value": 1304, "change": -1.4 },
+  { "id": "shares", "label": "Shares", "value": 642, "change": 8.7 }
+]

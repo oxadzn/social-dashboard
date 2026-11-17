@@ -1,0 +1,56 @@
+:root {
+  --bg: #f4f5f8;
+  --surface: #ffffff;
+  --ink: #1b2330;
+  --muted: #667085;
+  --line: #e4e7ec;
+  --accent: #3d5afe;
+  --up: #12a150;
+  --down: #d92d20;
+  --gap: 16px;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+
+/* ---- layout (CSS Grid for the page, Flexbox for the pieces) ---- */
+.shell { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.shell__header { display: flex; flex-wrap: wrap; gap: var(--gap); align-items: center; justify-content: space-between; margin-bottom: var(--gap); }
+.shell__header h1 { margin: 0; font-size: 1.4rem; }
+.shell__actions { display: flex; flex-wrap: wrap; gap: var(--gap); align-items: center; }
+
+.grid { display: grid; gap: var(--gap); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.metrics { grid-column: 1 / -1; display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+/* ---- responsive: single column on small screens ---- */
+@media (max-width: 800px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* ---- cards & widgets ---- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; min-width: 0; }
+.card__title { margin: 0 0 12px; font-size: 1rem; }
+.chart-box { height: 260px; }
+
+.metric { display: flex; flex-direction: column; gap: 4px; }
+.metric__label { color: var(--muted); font-size: 0.85rem; }
+.metric__value { font-size: 1.7rem; }
+.metric__change.up { color: var(--up); }
+.metric__change.down { color: var(--down); }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+
+.schedule__day ul { margin: 4px 0 12px; padding-left: 18px; color: var(--muted); }
+
+.date-range { display: flex; gap: 12px; }
+.date-range label { display: flex; flex-direction: column; font-size: 0.75rem; color: var(--muted); gap: 2px; }
+.date-range input { font: inherit; padding: 4px 6px; border: 1px solid var(--line); border-radius: 6px; }
+.last-updated { color: var(--muted); font-size: 0.85rem; }
+
+.state { padding: 24px; text-align: center; color: var(--muted); }
+.state--error { color: var(--down); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
