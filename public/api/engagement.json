@@ -1,9 +1,542 @@
 [
-  { "date": "2026-11-06", "likes": 1120, "comments": 160, "shares": 70 },
-  { "date": "2026-11-07", "likes": 1340, "comments": 185, "shares": 88 },
-  { "date": "2026-11-08", "likes": 980,  "comments": 140, "shares": 61 },
-  { "date": "2026-11-09", "likes": 1410, "comments": 201, "shares": 99 },
-  { "date": "2026-11-10", "likes": 1290, "comments": 175, "shares": 90 },
-  { "date": "2026-11-11", "likes": 1330, "comments": 230, "shares": 120 },
-  { "date": "2026-11-12", "likes": 1450, "comments": 213, "shares": 114 }
+  {
+    "date": "2026-08-25",
+    "likes": 921,
+    "comments": 151,
+    "shares": 69
+  },
+  {
+    "date": "2026-08-26",
+    "likes": 965,
+    "comments": 179,
+    "shares": 85
+  },
+  {
+    "date": "2026-08-27",
+    "likes": 969,
+    "comments": 152,
+    "shares": 78
+  },
+  {
+    "date": "2026-08-28",
+    "likes": 782,
+    "comments": 129,
+    "shares": 69
+  },
+  {
+    "date": "2026-08-29",
+    "likes": 601,
+    "comments": 96,
+    "shares": 60
+  },
+  {
+    "date": "2026-08-30",
+    "likes": 677,
+    "comments": 129,
+    "shares": 59
+  },
+  {
+    "date": "2026-08-31",
+    "likes": 769,
+    "comments": 138,
+    "shares": 67
+  },
+  {
+    "date": "2026-09-01",
+    "likes": 1000,
+    "comments": 160,
+    "shares": 76
+  },
+  {
+    "date": "2026-09-02",
+    "likes": 1005,
+    "comments": 168,
+    "shares": 87
+  },
+  {
+    "date": "2026-09-03",
+    "likes": 998,
+    "comments": 182,
+    "shares": 93
+  },
+  {
+    "date": "2026-09-04",
+    "likes": 808,
+    "comments": 158,
+    "shares": 63
+  },
+  {
+    "date": "2026-09-05",
+    "likes": 700,
+    "comments": 111,
+    "shares": 50
+  },
+  {
+    "date": "2026-09-06",
+    "likes": 730,
+    "comments": 134,
+    "shares": 62
+  },
+  {
+    "date": "2026-09-07",
+    "likes": 822,
+    "comments": 156,
+    "shares": 71
+  },
+  {
+    "date": "2026-09-08",
+    "likes": 1023,
+    "comments": 182,
+    "shares": 83
+  },
+  {
+    "date": "2026-09-09",
+    "likes": 1058,
+    "comments": 200,
+    "shares": 82
+  },
+  {
+    "date": "2026-09-10",
+    "likes": 1051,
+    "comments": 188,
+    "shares": 101
+  },
+  {
+    "date": "2026-09-11",
+    "likes": 876,
+    "comments": 157,
+    "shares": 77
+  },
+  {
+    "date": "2026-09-12",
+    "likes": 738,
+    "comments": 116,
+    "shares": 63
+  },
+  {
+    "date": "2026-09-13",
+    "likes": 777,
+    "comments": 122,
+    "shares": 67
+  },
+  {
+    "date": "2026-09-14",
+    "likes": 848,
+    "comments": 160,
+    "shares": 66
+  },
+  {
+    "date": "2026-09-15",
+    "likes": 1063,
+    "comments": 182,
+    "shares": 91
+  },
+  {
+    "date": "2026-09-16",
+    "likes": 1100,
+    "comments": 203,
+    "shares": 102
+  },
+  {
+    "date": "2026-09-17",
+    "likes": 1119,
+    "comments": 189,
+    "shares": 98
+  },
+  {
+    "date": "2026-09-18",
+    "likes": 940,
+    "comments": 156,
+    "shares": 81
+  },
+  {
+    "date": "2026-09-19",
+    "likes": 757,
+    "comments": 140,
+    "shares": 71
+  },
+  {
+    "date": "2026-09-20",
+    "likes": 792,
+    "comments": 140,
+    "shares": 61
+  },
+  {
+    "date": "2026-09-21",
+    "likes": 898,
+    "comments": 162,
+    "shares": 90
+  },
+  {
+    "date": "2026-09-22",
+    "likes": 1155,
+    "comments": 209,
+    "shares": 111
+  },
+  {
+    "date": "2026-09-23",
+    "likes": 1201,
+    "comments": 196,
+    "shares": 107
+  },
+  {
+    "date": "2026-09-24",
+    "likes": 1151,
+    "comments": 209,
+    "shares": 112
+  },
+  {
+    "date": "2026-09-25",
+    "likes": 956,
+    "comments": 178,
+    "shares": 87
+  },
+  {
+    "date": "2026-09-26",
+    "likes": 787,
+    "comments": 133,
+    "shares": 63
+  },
+  {
+    "date": "2026-09-27",
+    "likes": 813,
+    "comments": 152,
+    "shares": 69
+  },
+  {
+    "date": "2026-09-28",
+    "likes": 955,
+    "comments": 166,
+    "shares": 85
+  },
+  {
+    "date": "2026-09-29",
+    "likes": 1191,
+    "comments": 221,
+    "shares": 108
+  },
+  {
+    "date": "2026-09-30",
+    "likes": 1260,
+    "comments": 205,
+    "shares": 117
+  },
+  {
+    "date": "2026-10-01",
+    "likes": 1222,
+    "comments": 219,
+    "shares": 107
+  },
+  {
+    "date": "2026-10-02",
+    "likes": 1006,
+    "comments": 166,
+    "shares": 84
+  },
+  {
+    "date": "2026-10-03",
+    "likes": 806,
+    "comments": 132,
+    "shares": 70
+  },
+  {
+    "date": "2026-10-04",
+    "likes": 875,
+    "comments": 163,
+    "shares": 72
+  },
+  {
+    "date": "2026-10-05",
+    "likes": 993,
+    "comments": 166,
+    "shares": 99
+  },
+  {
+    "date": "2026-10-06",
+    "likes": 1221,
+    "comments": 219,
+    "shares": 114
+  },
+  {
+    "date": "2026-10-07",
+    "likes": 1293,
+    "comments": 240,
+    "shares": 119
+  },
+  {
+    "date": "2026-10-08",
+    "likes": 1275,
+    "comments": 223,
+    "shares": 112
+  },
+  {
+    "date": "2026-10-09",
+    "likes": 1060,
+    "comments": 193,
+    "shares": 104
+  },
+  {
+    "date": "2026-10-10",
+    "likes": 861,
+    "comments": 153,
+    "shares": 82
+  },
+  {
+    "date": "2026-10-11",
+    "likes": 950,
+    "comments": 175,
+    "shares": 77
+  },
+  {
+    "date": "2026-10-12",
+    "likes": 1027,
+    "comments": 189,
+    "shares": 92
+  },
+  {
+    "date": "2026-10-13",
+    "likes": 1279,
+    "comments": 230,
+    "shares": 113
+  },
+  {
+    "date": "2026-10-14",
+    "likes": 1369,
+    "comments": 247,
+    "shares": 136
+  },
+  {
+    "date": "2026-10-15",
+    "likes": 1336,
+    "comments": 245,
+    "shares": 123
+  },
+  {
+    "date": "2026-10-16",
+    "likes": 1074,
+    "comments": 200,
+    "shares": 96
+  },
+  {
+    "date": "2026-10-17",
+    "likes": 911,
+    "comments": 148,
+    "shares": 83
+  },
+  {
+    "date": "2026-10-18",
+    "likes": 1000,
+    "comments": 157,
+    "shares": 83
+  },
+  {
+    "date": "2026-10-19",
+    "likes": 1130,
+    "comments": 200,
+    "shares": 97
+  },
+  {
+    "date": "2026-10-20",
+    "likes": 1370,
+    "comments": 240,
+    "shares": 124
+  },
+  {
+    "date": "2026-10-21",
+    "likes": 1422,
+    "comments": 245,
+    "shares": 132
+  },
+  {
+    "date": "2026-10-22",
+    "likes": 1376,
+    "comments": 255,
+    "shares": 139
+  },
+  {
+    "date": "2026-10-23",
+    "likes": 1164,
+    "comments": 216,
+    "shares": 105
+  },
+  {
+    "date": "2026-10-24",
+    "likes": 918,
+    "comments": 159,
+    "shares": 79
+  },
+  {
+    "date": "2026-10-25",
+    "likes": 1035,
+    "comments": 184,
+    "shares": 98
+  },
+  {
+    "date": "2026-10-26",
+    "likes": 1147,
+    "comments": 202,
+    "shares": 117
+  },
+  {
+    "date": "2026-10-27",
+    "likes": 1404,
+    "comments": 250,
+    "shares": 131
+  },
+  {
+    "date": "2026-10-28",
+    "likes": 1443,
+    "comments": 254,
+    "shares": 138
+  },
+  {
+    "date": "2026-10-29",
+    "likes": 1426,
+    "comments": 265,
+    "shares": 136
+  },
+  {
+    "date": "2026-10-30",
+    "likes": 1171,
+    "comments": 203,
+    "shares": 107
+  },
+  {
+    "date": "2026-10-31",
+    "likes": 965,
+    "comments": 167,
+    "shares": 88
+  },
+  {
+    "date": "2026-11-01",
+    "likes": 1016,
+    "comments": 178,
+    "shares": 97
+  },
+  {
+    "date": "2026-11-02",
+    "likes": 1195,
+    "comments": 198,
+    "shares": 106
+  },
+  {
+    "date": "2026-11-03",
+    "likes": 1461,
+    "comments": 261,
+    "shares": 144
+  },
+  {
+    "date": "2026-11-04",
+    "likes": 1559,
+    "comments": 268,
+    "shares": 140
+  },
+  {
+    "date": "2026-11-05",
+    "likes": 1506,
+    "comments": 276,
+    "shares": 152
+  },
+  {
+    "date": "2026-11-06",
+    "likes": 1238,
+    "comments": 209,
+    "shares": 116
+  },
+  {
+    "date": "2026-11-07",
+    "likes": 962,
+    "comments": 180,
+    "shares": 102
+  },
+  {
+    "date": "2026-11-08",
+    "likes": 1115,
+    "comments": 189,
+    "shares": 115
+  },
+  {
+    "date": "2026-11-09",
+    "likes": 1218,
+    "comments": 214,
+    "shares": 118
+  },
+  {
+    "date": "2026-11-10",
+    "likes": 1499,
+    "comments": 263,
+    "shares": 154
+  },
+  {
+    "date": "2026-11-11",
+    "likes": 1616,
+    "comments": 293,
+    "shares": 155
+  },
+  {
+    "date": "2026-11-12",
+    "likes": 1581,
+    "comments": 269,
+    "shares": 160
+  },
+  {
+    "date": "2026-11-13",
+    "likes": 1290,
+    "comments": 226,
+    "shares": 116
+  },
+  {
+    "date": "2026-11-14",
+    "likes": 1052,
+    "comments": 186,
+    "shares": 106
+  },
+  {
+    "date": "2026-11-15",
+    "likes": 1112,
+    "comments": 189,
+    "shares": 110
+  },
+  {
+    "date": "2026-11-16",
+    "likes": 1250,
+    "comments": 211,
+    "shares": 132
+  },
+  {
+    "date": "2026-11-17",
+    "likes": 1544,
+    "comments": 281,
+    "shares": 164
+  },
+  {
+    "date": "2026-11-18",
+    "likes": 1602,
+    "comments": 290,
+    "shares": 169
+  },
+  {
+    "date": "2026-11-19",
+    "likes": 1595,
+    "comments": 294,
+    "shares": 163
+  },
+  {
+    "date": "2026-11-20",
+    "likes": 1355,
+    "comments": 223,
+    "shares": 132
+  },
+  {
+    "date": "2026-11-21",
+    "likes": 1036,
+    "comments": 183,
+    "shares": 110
+  },
+  {
+    "date": "2026-11-22",
+    "likes": 1137,
+    "comments": 220,
+    "shares": 110
+  }
 ]

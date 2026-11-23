@@ -1,6 +1,182 @@
 [
-  { "id": 1, "title": "Behind the scenes: launch week", "platform": "Instagram", "likes": 940, "comments": 82, "shares": 41, "date": "2026-11-09" },
-  { "id": 2, "title": "5 tips for better thumbnails", "platform": "YouTube", "likes": 1210, "comments": 144, "shares": 77, "date": "2026-11-10" },
-  { "id": 3, "title": "Poll: which feature next?", "platform": "X", "likes": 430, "comments": 210, "shares": 36, "date": "2026-11-11" },
-  { "id": 4, "title": "Customer story: Priya's studio", "platform": "LinkedIn", "likes": 660, "comments": 58, "shares": 90, "date": "2026-11-12" }
+  {
+    "id": 6,
+    "title": "New product sneak peek",
+    "platform": "Instagram",
+    "likes": 588,
+    "comments": 111,
+    "shares": 56,
+    "date": "2026-08-26"
+  },
+  {
+    "id": 12,
+    "title": "Collab announcement",
+    "platform": "YouTube",
+    "likes": 921,
+    "comments": 139,
+    "shares": 44,
+    "date": "2026-08-29"
+  },
+  {
+    "id": 5,
+    "title": "How we grew to 20k followers",
+    "platform": "TikTok",
+    "likes": 580,
+    "comments": 74,
+    "shares": 89,
+    "date": "2026-09-03"
+  },
+  {
+    "id": 2,
+    "title": "5 tips for better thumbnails",
+    "platform": "YouTube",
+    "likes": 944,
+    "comments": 109,
+    "shares": 102,
+    "date": "2026-09-06"
+  },
+  {
+    "id": 3,
+    "title": "Poll: which feature next?",
+    "platform": "X",
+    "likes": 879,
+    "comments": 180,
+    "shares": 96,
+    "date": "2026-09-09"
+  },
+  {
+    "id": 13,
+    "title": "Ask me anything — your questions",
+    "platform": "X",
+    "likes": 905,
+    "comments": 56,
+    "shares": 87,
+    "date": "2026-09-12"
+  },
+  {
+    "id": 8,
+    "title": "Weekly recap: top moments",
+    "platform": "X",
+    "likes": 846,
+    "comments": 134,
+    "shares": 90,
+    "date": "2026-09-21"
+  },
+  {
+    "id": 16,
+    "title": "Trend watch: autumn aesthetics",
+    "platform": "Instagram",
+    "likes": 921,
+    "comments": 56,
+    "shares": 108,
+    "date": "2026-09-21"
+  },
+  {
+    "id": 15,
+    "title": "Case study: doubling reach in 30 days",
+    "platform": "TikTok",
+    "likes": 725,
+    "comments": 196,
+    "shares": 65,
+    "date": "2026-09-22"
+  },
+  {
+    "id": 14,
+    "title": "Product update v2.1",
+    "platform": "LinkedIn",
+    "likes": 919,
+    "comments": 95,
+    "shares": 146,
+    "date": "2026-10-04"
+  },
+  {
+    "id": 20,
+    "title": "Year in review teaser",
+    "platform": "TikTok",
+    "likes": 1024,
+    "comments": 172,
+    "shares": 51,
+    "date": "2026-10-07"
+  },
+  {
+    "id": 9,
+    "title": "Q3 results and what's next",
+    "platform": "LinkedIn",
+    "likes": 712,
+    "comments": 84,
+    "shares": 147,
+    "date": "2026-10-10"
+  },
+  {
+    "id": 18,
+    "title": "Workflow tour — how we plan content",
+    "platform": "X",
+    "likes": 955,
+    "comments": 184,
+    "shares": 55,
+    "date": "2026-10-15"
+  },
+  {
+    "id": 19,
+    "title": "Milestone: thank you for 24k!",
+    "platform": "LinkedIn",
+    "likes": 964,
+    "comments": 196,
+    "shares": 27,
+    "date": "2026-10-23"
+  },
+  {
+    "id": 11,
+    "title": "Community shoutout Sunday",
+    "platform": "Instagram",
+    "likes": 905,
+    "comments": 79,
+    "shares": 52,
+    "date": "2026-10-29"
+  },
+  {
+    "id": 17,
+    "title": "Reader mail: best comments this week",
+    "platform": "YouTube",
+    "likes": 1121,
+    "comments": 205,
+    "shares": 89,
+    "date": "2026-11-01"
+  },
+  {
+    "id": 1,
+    "title": "Behind the scenes: launch week",
+    "platform": "Instagram",
+    "likes": 921,
+    "comments": 192,
+    "shares": 111,
+    "date": "2026-11-03"
+  },
+  {
+    "id": 7,
+    "title": "Team spotlight: meet the designers",
+    "platform": "YouTube",
+    "likes": 1014,
+    "comments": 185,
+    "shares": 48,
+    "date": "2026-11-07"
+  },
+  {
+    "id": 4,
+    "title": "Customer story: Priya's studio",
+    "platform": "LinkedIn",
+    "likes": 1163,
+    "comments": 134,
+    "shares": 125,
+    "date": "2026-11-11"
+  },
+  {
+    "id": 10,
+    "title": "Tutorial: setting up your profile",
+    "platform": "TikTok",
+    "likes": 1185,
+    "comments": 218,
+    "shares": 21,
+    "date": "2026-11-22"
+  }
 ]

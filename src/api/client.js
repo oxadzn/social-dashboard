@@ -17,3 +17,4 @@ export const getEngagement = (params) => client.get('/engagement.json', { params
 export const getFollowers  = (params) => client.get('/followers.json',  { params }).then((r) => r.data);
 export const getPosts      = (params) => client.get('/posts.json',      { params }).then((r) => r.data);
 export const getSchedule   = (params) => client.get('/schedule.json',   { params }).then((r) => r.data);
+export const getPlatforms  = () => client.get('/platforms.json').then((r) => r.data);

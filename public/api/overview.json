@@ -1,6 +1,39 @@
 [
-  { "id": "followers", "label": "Followers", "value": 12480, "change": 3.2 },
-  { "id": "likes", "label": "Likes", "value": 8920, "change": 5.1 },
-  { "id": "comments", "label": "Comments", "value": 1304, "change": -1.4 },
-  { "id": "shares", "label": "Shares", "value": 642, "change": 8.7 }
+  {
+    "id": "followers",
+    "label": "Total followers",
+    "value": 24798,
+    "change": 3.2
+  },
+  {
+    "id": "impressions",
+    "label": "Impressions",
+    "value": 183400,
+    "change": 7.8
+  },
+  {
+    "id": "likes",
+    "label": "Total likes",
+    "value": 18920,
+    "change": 5.1
+  },
+  {
+    "id": "comments",
+    "label": "Comments",
+    "value": 3104,
+    "change": -1.4
+  },
+  {
+    "id": "shares",
+    "label": "Shares",
+    "value": 2642,
+    "change": 8.7
+  },
+  {
+    "id": "eng_rate",
+    "label": "Eng. rate",
+    "value": 4.2,
+    "change": 0.3,
+    "suffix": "%"
+  }
 ]

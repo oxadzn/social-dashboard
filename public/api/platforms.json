@@ -1,0 +1,27 @@
+[
+  {
+    "platform": "Instagram",
+    "posts": 48,
+    "reach": 68400
+  },
+  {
+    "platform": "YouTube",
+    "posts": 22,
+    "reach": 54200
+  },
+  {
+    "platform": "TikTok",
+    "posts": 36,
+    "reach": 39800
+  },
+  {
+    "platform": "LinkedIn",
+    "posts": 18,
+    "reach": 12600
+  },
+  {
+    "platform": "X",
+    "posts": 31,
+    "reach": 8400
+  }
+]
