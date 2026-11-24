@@ -36,7 +36,7 @@ function LineChartWidget({ title, data, xKey, lines }) {
                   name={line.name || line.key}
                   stroke={line.color}
                   strokeWidth={2.5}
-                  dot={false}
+                  dot={line.showDot || false}
                   activeDot={{ r: 5, strokeWidth: 0 }}
                 />
               ))}

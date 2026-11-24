@@ -2,13 +2,13 @@ import withLoading from '../../hoc/withLoading';
 
 const colors = ['#65785a', '#b48a63', '#c4a86d', '#8e9b7e', '#a8a294'];
 
-function PlatformPerformance({ platforms = [] }) {
+function PlatformPerformance({ platforms = [], title = 'Platform reach' }) {
   const maxReach = Math.max(...platforms.map((item) => item.reach), 1);
 
   return (
     <section className="panel platform-panel" id="audience">
       <div className="panel-heading">
-        <h2>Platform reach</h2>
+        <h2>{title}</h2>
       </div>
       <div className="platform-list">
         {platforms.map((item, index) => (

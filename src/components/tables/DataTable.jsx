@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
-import { format, parseISO } from 'date-fns';
+import { format, isValid, parseISO } from 'date-fns';
 import withLoading from '../../hoc/withLoading';
 
 const PAGE_SIZE = 5;
 
-function DataTable({ title, rows, platforms = [] }) {
+function DataTable({ title, rows = [], platforms = [] }) {
   const [sort, setSort] = useState({ key: 'date', direction: 'desc' });
   const [platform, setPlatform] = useState('All platforms');
   const [page, setPage] = useState(0);
@@ -27,6 +27,7 @@ function DataTable({ title, rows, platforms = [] }) {
     { key: 'title', label: 'Post', className: 'post-title-cell' },
     { key: 'platform', label: 'Platform' },
     { key: 'date', label: 'Published' },
+    { key: 'views', label: 'Views', numeric: true },
     { key: 'likes', label: 'Likes', numeric: true },
     { key: 'comments', label: 'Comments', numeric: true },
     { key: 'shares', label: 'Shares', numeric: true },
@@ -42,9 +43,19 @@ function DataTable({ title, rows, platforms = [] }) {
   };
 
   const renderCell = (row, key) => {
-    if (key === 'date') return format(parseISO(row.date), 'MMM d, yyyy');
-    if (key === 'interactions') return (row.likes + row.comments + row.shares).toLocaleString();
-    if (['likes', 'comments', 'shares'].includes(key)) return Number(row[key]).toLocaleString();
+    if (key === 'date') {
+      const date = row.date ? parseISO(row.date) : null;
+      return date && isValid(date) ? format(date, 'MMM d, yyyy') : '—';
+    }
+    if (key === 'interactions') {
+      const interactions = row.interactions === undefined
+        ? Number(row.likes || 0) + Number(row.comments || 0) + Number(row.shares || 0)
+        : row.interactions;
+      return interactions === null ? '—' : Number(interactions).toLocaleString();
+    }
+    if (['views', 'likes', 'comments', 'shares'].includes(key)) {
+      return row[key] === null || row[key] === undefined ? '—' : Number(row[key]).toLocaleString();
+    }
     if (key === 'platform') return row.platform;
     return row[key];
   };

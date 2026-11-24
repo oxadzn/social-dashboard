@@ -18,3 +18,8 @@ export const getFollowers  = (params) => client.get('/followers.json',  { params
 export const getPosts      = (params) => client.get('/posts.json',      { params }).then((r) => r.data);
 export const getSchedule   = (params) => client.get('/schedule.json',   { params }).then((r) => r.data);
 export const getPlatforms  = () => client.get('/platforms.json').then((r) => r.data);
+export const getYouTubeStatus = () => client.get('/youtube/status').then((r) => r.data);
+export const getYouTubeDashboard = (range) =>
+  client.get('/youtube/dashboard', { params: range }).then((r) => r.data);
+export const disconnectYouTube = () =>
+  client.post('/youtube/disconnect').then((r) => r.data);

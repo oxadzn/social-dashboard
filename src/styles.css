@@ -37,6 +37,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .page-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 23px; border-bottom: 1px solid var(--border); }
 .page-header h1 { margin: 0; font-family: Inter, sans-serif; font-size: clamp(26px, 2.5vw, 34px); font-weight: 600; letter-spacing: -1px; }
 .page-actions { display: flex; align-items: center; gap: 15px; }
+.social-connection { display: flex; max-width: 100%; flex-wrap: wrap; align-items: center; gap: 9px; }
+.social-account { color: var(--primary-dark); font-size: 12px; font-weight: 500; white-space: nowrap; }
+.social-avatar { width: 25px; height: 25px; border-radius: 50%; object-fit: cover; }
+.social-button { min-height: 34px; padding: 0 11px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text); font-size: 11px; font-weight: 500; cursor: pointer; white-space: nowrap; }
+.social-button:hover:not(:disabled) { border-color: var(--primary); background: #f0f2eb; }
+.social-button:disabled { color: var(--muted); cursor: default; }
+.social-message { max-width: 230px; color: var(--muted); font-size: 10px; line-height: 1.4; overflow-wrap: anywhere; }
+.social-message--error { color: #a66c55; }
 .range-control { display: flex; align-items: center; gap: 11px; padding: 6px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); }
 .range-presets { display: flex; align-items: center; gap: 2px; padding-right: 7px; border-right: 1px solid var(--border); }
 .range-presets button { min-width: 32px; height: 28px; padding: 0 7px; border: 0; border-radius: 6px; background: transparent; color: var(--muted); font-size: 9px; font-weight: 700; cursor: pointer; }

@@ -5,7 +5,7 @@ const navigation = [
   { label: 'Schedule', href: '#schedule' },
 ];
 
-export default function DashboardLayout({ title, actions, children }) {
+export default function DashboardLayout({ title, actions, isLive = false, children }) {
   return (
     <div className="app-shell">
       <aside className="sidebar">
@@ -13,7 +13,7 @@ export default function DashboardLayout({ title, actions, children }) {
           <span>fieldnotes<span className="brand__dot">.</span></span>
         </a>
         <nav className="sidebar-nav" aria-label="Dashboard sections">
-          {navigation.map((item, index) => (
+          {navigation.filter((item) => !isLive || item.label !== 'Schedule').map((item, index) => (
             <a className={`sidebar-nav__link${index === 0 ? ' is-active' : ''}`} href={item.href} key={item.label}>
               {item.label}
             </a>
