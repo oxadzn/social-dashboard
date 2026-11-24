@@ -59,6 +59,14 @@ export default function Dashboard() {
   const visiblePosts = isLive ? postsData : filterByRange(postsData, 'date', range);
   const visibleFollowers = filterByRange(followersData, 'date', range);
   const visibleEngagement = filterByRange(engagementData, 'date', range);
+  const analyticsUpdatedLabel = isLive && liveData?.analyticsCheckedAt
+    ? [
+      liveData.analyticsThroughDate
+        ? `Analytics through ${new Date(`${liveData.analyticsThroughDate}T00:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`
+        : 'No Analytics data',
+      `checked ${new Date(liveData.analyticsCheckedAt).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })}`,
+    ].join(' · ')
+    : null;
   const analyticsError = live.data?.analyticsError
     ? new Error(live.data.analyticsError)
     : null;
@@ -121,6 +129,7 @@ export default function Dashboard() {
             error={isLive ? live.error || analyticsError : engagement.error}
             data={visibleEngagement}
             xKey="date"
+            updatedLabel={analyticsUpdatedLabel}
             bars={isLive ? [
               { key: 'likes', color: '#66775B', name: 'Likes' },
               { key: 'comments', color: '#A57955', name: 'Comments' },

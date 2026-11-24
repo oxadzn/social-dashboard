@@ -2,11 +2,12 @@ import { format, parseISO } from 'date-fns';
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import withLoading from '../../hoc/withLoading';
 
-function BarChartWidget({ title, data, xKey, bars }) {
+function BarChartWidget({ title, data, xKey, bars, updatedLabel }) {
   return (
     <section className="panel chart-panel">
       <div className="panel-heading">
         <h2>{title}</h2>
+        {updatedLabel && <span className="chart-updated">{updatedLabel}</span>}
       </div>
       {data.length === 0 ? <div className="chart-empty">There’s not enough data in this date range yet.</div> : (
         <div className="chart-box">

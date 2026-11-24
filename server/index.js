@@ -13,7 +13,7 @@ import {
   getVideos,
   refreshAccessToken,
 } from './youtube.js';
-import { matchesOrigin } from './origin.js';
+import { isLoopbackAddress, matchesOrigin } from './origin.js';
 import { createTokenStore, getEncryptionKey } from './storage.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -21,12 +21,20 @@ const app = express();
 const cookieName = 'social_dashboard_session';
 const sessionLifetime = 60 * 24 * 60 * 60;
 const stateLifetime = 10 * 60 * 1000;
+const frontendOrigins = (
+  process.env.FRONTEND_ORIGINS
+  || 'http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174'
+).split(',').map((origin) => origin.trim()).filter(Boolean);
 const authorizationStates = new Map();
 const tokenStore = createTokenStore(
   path.join(root, '.data', 'youtube.enc.json'),
   () => getEncryptionKey(process.env.YOUTUBE_TOKEN_ENCRYPTION_KEY),
 );
-const config = getYouTubeConfig(process.env);
+const credentialsStore = createTokenStore(
+  path.join(root, '.data', 'youtube-config.enc.json'),
+  () => getEncryptionKey(process.env.YOUTUBE_TOKEN_ENCRYPTION_KEY),
+);
+let config = getYouTubeConfig(process.env);
 
 function getCookies(request) {
   return Object.fromEntries(
@@ -112,6 +120,14 @@ async function getValidToken() {
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 app.use(express.json({ limit: '16kb' }));
+app.use('/api', (request, response, next) => {
+  response.set({
+    'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+    Pragma: 'no-cache',
+    Expires: '0',
+  });
+  next();
+});
 
 app.get('/api/youtube/status', (request, response) => {
   const stored = tokenStore.get();
@@ -127,17 +143,82 @@ app.get('/api/youtube/status', (request, response) => {
 
   response.json({
     configured: config.configured && encryptionKeyReady,
+    encryptionKeyReady,
     connected: Boolean(stored),
     authenticated,
     account: authenticated ? stored.channel : null,
     expiresAt: authenticated ? stored.expiresAt : null,
+    redirectUri: config.redirectUri || `${request.get('origin') || `${request.protocol}://${request.get('host')}`}/api/youtube/callback`,
   });
+});
+
+app.post('/api/youtube/configure', async (request, response, next) => {
+  if (!isLoopbackAddress(request.socket.remoteAddress)) {
+    return response.status(403).json({ error: 'Credential setup is available only from this computer.' });
+  }
+
+  if (!matchesOrigin(request, frontendOrigins)) {
+    return response.status(403).json({ error: 'Request origin was not allowed.' });
+  }
+
+  try {
+    getEncryptionKey(process.env.YOUTUBE_TOKEN_ENCRYPTION_KEY);
+  } catch {
+    return response.status(503).json({
+      error: 'Set YOUTUBE_TOKEN_ENCRYPTION_KEY in .env before saving credentials. This key encrypts the credentials on this server.',
+    });
+  }
+
+  const origin = request.get('origin');
+  let redirectUri;
+  try {
+    const url = new URL(origin);
+    if (!['http:', 'https:'].includes(url.protocol)) throw new Error('Invalid origin.');
+    redirectUri = new URL('/api/youtube/callback', url).toString();
+  } catch {
+    return response.status(400).json({ error: 'The dashboard origin is invalid.' });
+  }
+
+  const submitted = request.body || {};
+  const credentials = {
+    apiKey: typeof submitted.apiKey === 'string' ? submitted.apiKey.trim() : '',
+    clientId: typeof submitted.clientId === 'string' ? submitted.clientId.trim() : '',
+    clientSecret: typeof submitted.clientSecret === 'string' ? submitted.clientSecret.trim() : '',
+    redirectUri,
+    apiVersion: process.env.YOUTUBE_API_VERSION || 'v3',
+  };
+  const nextConfig = getYouTubeConfig({
+    YOUTUBE_API_KEY: credentials.apiKey,
+    YOUTUBE_CLIENT_ID: credentials.clientId,
+    YOUTUBE_CLIENT_SECRET: credentials.clientSecret,
+    YOUTUBE_REDIRECT_URI: credentials.redirectUri,
+    YOUTUBE_API_VERSION: credentials.apiVersion,
+  });
+  if (!nextConfig.configured) {
+    return response.status(400).json({
+      error: 'Enter the YouTube API key, Google OAuth client ID, and client secret.',
+    });
+  }
+
+  try {
+    const currentConfig = credentialsStore.get()?.credentials || getYouTubeConfig(process.env);
+    const changed = currentConfig.apiKey !== credentials.apiKey
+      || currentConfig.clientId !== credentials.clientId
+      || currentConfig.clientSecret !== credentials.clientSecret
+      || currentConfig.redirectUri !== credentials.redirectUri;
+    await credentialsStore.save({ credentials });
+    if (changed) await tokenStore.clear();
+    config = nextConfig;
+    return response.json({ configured: true, redirectUri });
+  } catch (error) {
+    return next(error);
+  }
 });
 
 app.get('/api/youtube/connect', (request, response, next) => {
   if (!config.configured || !process.env.YOUTUBE_TOKEN_ENCRYPTION_KEY) {
     return response.status(503).json({
-      error: 'Set the YouTube API key, Google OAuth client credentials, redirect URI, and token encryption key in .env.',
+      error: 'Configure YouTube credentials in the dashboard or .env, then set the token encryption key.',
     });
   }
 
@@ -148,7 +229,11 @@ app.get('/api/youtube/connect', (request, response, next) => {
     for (const [key, value] of authorizationStates) {
       if (value.expiresAt < Date.now()) authorizationStates.delete(key);
     }
-    authorizationStates.set(state, { sessionId, expiresAt: Date.now() + stateLifetime });
+    authorizationStates.set(state, {
+      sessionId,
+      config,
+      expiresAt: Date.now() + stateLifetime,
+    });
     setSessionCookie(response, sessionId);
     return response.redirect(buildAuthorizationUrl(config, state));
   } catch (error) {
@@ -173,14 +258,13 @@ app.get('/api/youtube/callback', async (request, response) => {
   }
 
   try {
-    const token = await exchangeAuthorizationCode(config, code);
-    const previous = tokenStore.get();
-    const refreshToken = token.refreshToken || previous?.refreshToken;
+    const token = await exchangeAuthorizationCode(pending.config, code);
+    const refreshToken = token.refreshToken;
     if (!refreshToken) {
       throw new Error('Google did not return a refresh token. Revoke this app in your Google account and reconnect.');
     }
 
-    const profile = await getChannel(config, token.accessToken);
+    const profile = await getChannel(pending.config, token.accessToken);
     await tokenStore.save({
       ...token,
       refreshToken,
@@ -200,7 +284,7 @@ app.get('/api/youtube/callback', async (request, response) => {
 });
 
 app.post('/api/youtube/disconnect', requireYouTubeSession, async (request, response, next) => {
-  if (!matchesOrigin(request)) {
+  if (!matchesOrigin(request, frontendOrigins)) {
     return response.status(403).json({ error: 'Request origin was not allowed.' });
   }
 
@@ -232,6 +316,7 @@ app.get('/api/youtube/dashboard', requireYouTubeSession, async (request, respons
       process.stderr.write(`YouTube Analytics request failed: ${error.message}\n`);
       analyticsError = 'YouTube Analytics is temporarily unavailable. Video statistics are still available.';
     }
+    const analyticsCheckedAt = new Date().toISOString();
 
     const today = new Date().toISOString().slice(0, 10);
     const followersHistory = [
@@ -245,6 +330,7 @@ app.get('/api/youtube/dashboard', requireYouTubeSession, async (request, respons
       videos,
       report,
       analyticsError,
+      analyticsCheckedAt,
     }));
   } catch (error) {
     return next(error);
@@ -274,6 +360,16 @@ if (process.env.NODE_ENV === 'production') {
 
 export async function startServer() {
   await tokenStore.load();
+  const storedCredentials = await credentialsStore.load();
+  if (storedCredentials?.credentials) {
+    config = getYouTubeConfig({
+      ...process.env,
+      YOUTUBE_API_KEY: storedCredentials.credentials.apiKey,
+      YOUTUBE_CLIENT_ID: storedCredentials.credentials.clientId,
+      YOUTUBE_CLIENT_SECRET: storedCredentials.credentials.clientSecret,
+      YOUTUBE_REDIRECT_URI: storedCredentials.credentials.redirectUri,
+    });
+  }
   const port = Number(process.env.PORT || 3001);
   const host = process.env.HOST || '127.0.0.1';
   return app.listen(port, host, () => {

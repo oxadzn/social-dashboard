@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { randomBytes } from 'node:crypto';
 import test from 'node:test';
-import { matchesOrigin } from '../server/origin.js';
+import { isLoopbackAddress, matchesOrigin } from '../server/origin.js';
 import {
   buildAuthorizationUrl,
   buildDashboardData,
@@ -225,12 +225,18 @@ test('uses Analytics reports and maps metrics for all uploaded videos', async ()
     });
 
     assert.equal(calls[0].url.origin, 'https://youtubeanalytics.googleapis.com');
+    assert.equal(calls[0].options.cache, 'no-store');
     assert.equal(calls[0].url.searchParams.get('ids'), 'channel==MINE');
     assert.ok(calls[0].url.searchParams.get('metrics').includes('subscribersGained'));
     assert.equal(calls[0].options.headers.Authorization, 'Bearer access-token');
     assert.equal(calls[1].url.searchParams.get('key'), config.apiKey);
+    assert.equal(calls[1].options.cache, 'no-store');
     assert.equal(calls[1].url.searchParams.get('pageToken'), null);
     assert.equal(calls[2].url.searchParams.get('pageToken'), 'older-videos');
+    assert.equal(calls[3].options.cache, 'no-store');
+    assert.equal(calls[3].url.pathname, '/youtube/v3/videos');
+    assert.equal(calls[3].url.searchParams.get('part'), 'snippet,statistics');
+    assert.equal(calls.some(({ url }) => url.pathname.endsWith('/commentThreads')), false);
     assert.ok(calls.some(({ url }) => (url.searchParams.get('id') || '').includes('old-video')));
     assert.deepEqual(data.subscribers, [{ date: '2026-11-23', subscribers: 2 }]);
     assert.deepEqual(data.engagement, [{ date: '2026-11-23', likes: 8, comments: 2 }]);
@@ -242,6 +248,8 @@ test('uses Analytics reports and maps metrics for all uploaded videos', async ()
     assert.equal(data.posts[0].comments, 2);
     assert.ok(data.posts.some((video) => video.id === 'old-video' && video.date === '2012-01-01'));
     assert.equal(data.overview.find((metric) => metric.id === 'channel_views').value, 1200);
+    assert.equal(data.analyticsThroughDate, '2026-11-23');
+    assert.equal(data.analyticsCheckedAt, null);
   } finally {
     globalThis.fetch = originalFetch;
   }
@@ -328,7 +336,7 @@ test('accepts a 32-byte encryption key encoded in hex or base64 only', () => {
   assert.throws(() => getEncryptionKey('not-a-key'), /32 random bytes/);
 });
 
-test('allows same-origin and explicitly configured frontend origin only', () => {
+test('allows only exact explicitly configured frontend origins', () => {
   const makeRequest = (origin, host = '127.0.0.1:3001') => ({
     secure: false,
     get(name) {
@@ -341,5 +349,15 @@ test('allows same-origin and explicitly configured frontend origin only', () => 
   assert.equal(matchesOrigin(makeRequest('http://localhost:5173'), ['http://localhost:5173']), true);
   assert.equal(matchesOrigin(makeRequest('https://attacker.example'), ['http://localhost:5173']), false);
   assert.equal(matchesOrigin(makeRequest('http://localhost:5173')), false);
-  assert.equal(matchesOrigin(makeRequest('http://127.0.0.1:3001', '127.0.0.1:3001')), true);
+  assert.equal(matchesOrigin(makeRequest('http://127.0.0.1:3001', '127.0.0.1:3001'), []), false);
+  assert.equal(matchesOrigin(makeRequest('http://localhost:5173/'), ['http://localhost:5173']), false);
+});
+
+test('recognizes only loopback client addresses for credential setup', () => {
+  assert.equal(isLoopbackAddress('127.0.0.1'), true);
+  assert.equal(isLoopbackAddress('127.22.1.5'), true);
+  assert.equal(isLoopbackAddress('::1'), true);
+  assert.equal(isLoopbackAddress('::ffff:127.0.0.1'), true);
+  assert.equal(isLoopbackAddress('192.168.1.20'), false);
+  assert.equal(isLoopbackAddress(''), false);
 });

@@ -20,6 +20,11 @@ export const getSchedule   = (params) => client.get('/schedule.json',   { params
 export const getPlatforms  = () => client.get('/platforms.json').then((r) => r.data);
 export const getYouTubeStatus = () => client.get('/youtube/status').then((r) => r.data);
 export const getYouTubeDashboard = (range) =>
-  client.get('/youtube/dashboard', { params: range }).then((r) => r.data);
+  client.get('/youtube/dashboard', {
+    params: range,
+    headers: { 'Cache-Control': 'no-cache' },
+  }).then((r) => r.data);
+export const configureYouTube = (credentials) =>
+  client.post('/youtube/configure', credentials).then((r) => r.data);
 export const disconnectYouTube = () =>
   client.post('/youtube/disconnect').then((r) => r.data);

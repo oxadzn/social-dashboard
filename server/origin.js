@@ -4,12 +4,14 @@ export function matchesOrigin(request, allowedOrigins = []) {
 
   try {
     const url = new URL(origin);
-    if (url.origin === origin && allowedOrigins.includes(url.origin)) return true;
-
-    const forwardedProtocol = request.get('x-forwarded-proto')?.split(',')[0].trim();
-    const protocol = forwardedProtocol || (request.secure ? 'https' : 'http');
-    return url.host === request.get('host') && url.protocol === `${protocol}:`;
+    return url.origin === origin && allowedOrigins.includes(url.origin);
   } catch {
     return false;
   }
+}
+
+export function isLoopbackAddress(address) {
+  if (!address) return false;
+  const normalized = address.toLowerCase().replace(/^::ffff:/, '');
+  return normalized === '::1' || normalized.startsWith('127.');
 }

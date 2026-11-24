@@ -104,6 +104,7 @@ async function youtubeRequest(config, accessToken, resource, params = {}) {
     url.searchParams.set(key, String(value));
   }
   return readJsonResponse(await fetch(url, {
+    cache: 'no-store',
     headers: { Authorization: `Bearer ${accessToken}` },
   }));
 }
@@ -114,6 +115,7 @@ async function analyticsRequest(config, accessToken, params) {
     url.searchParams.set(key, String(value));
   }
   return readJsonResponse(await fetch(url, {
+    cache: 'no-store',
     headers: { Authorization: `Bearer ${accessToken}` },
   }));
 }
@@ -219,7 +221,13 @@ function getReportValue(row, indexes, name) {
   return index === undefined ? 0 : Number(row[index] || 0);
 }
 
-export function buildDashboardData({ channel, videos, report, analyticsError = null }) {
+export function buildDashboardData({
+  channel,
+  videos,
+  report,
+  analyticsError = null,
+  analyticsCheckedAt = null,
+}) {
   const analyticsReport = report || { columnHeaders: [], rows: [] };
   const indexes = Object.fromEntries(
     (analyticsReport.columnHeaders || []).map((column, index) => [column.name, index]),
@@ -241,6 +249,10 @@ export function buildDashboardData({ channel, videos, report, analyticsError = n
     };
   }).filter((row) => /^\d{4}-\d{2}-\d{2}$/.test(row.date));
   const sum = (key) => rows.reduce((total, row) => total + row[key], 0);
+  const analyticsThroughDate = rows.reduce(
+    (latest, row) => (row.date > latest ? row.date : latest),
+    '',
+  ) || null;
 
   return {
     channel,
@@ -264,6 +276,8 @@ export function buildDashboardData({ channel, videos, report, analyticsError = n
     })),
     posts: videos,
     analytics: rows,
+    analyticsThroughDate,
+    analyticsCheckedAt,
     analyticsError,
   };
 }

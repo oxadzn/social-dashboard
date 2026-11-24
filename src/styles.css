@@ -45,6 +45,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .social-button:disabled { color: var(--muted); cursor: default; }
 .social-message { max-width: 230px; color: var(--muted); font-size: 10px; line-height: 1.4; overflow-wrap: anywhere; }
 .social-message--error { color: #a66c55; }
+.youtube-dialog-backdrop { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; padding: 20px; background: #25291f80; }
+.youtube-credentials { display: grid; width: min(100%, 470px); gap: 14px; padding: 24px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-shadow: 0 16px 48px #25291f26; }
+.youtube-credentials h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.youtube-credentials > p { margin: -8px 0 0; color: var(--muted); font-size: 12px; }
+.youtube-credentials > label { display: grid; gap: 6px; color: #62665d; font-size: 12px; }
+.youtube-credentials input { width: 100%; min-height: 38px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 5px; background: white; color: var(--text); font-size: 13px; }
+.youtube-redirect { display: grid; gap: 5px; padding: 11px; border-radius: 5px; background: #f3f2ec; color: var(--muted); font-size: 11px; }
+.youtube-redirect code { color: var(--text); overflow-wrap: anywhere; }
+.youtube-credentials__actions { display: flex; justify-content: flex-end; gap: 8px; padding-top: 3px; }
 .range-control { display: flex; align-items: center; gap: 11px; padding: 6px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); }
 .range-presets { display: flex; align-items: center; gap: 2px; padding-right: 7px; border-right: 1px solid var(--border); }
 .range-presets button { min-width: 32px; height: 28px; padding: 0 7px; border: 0; border-radius: 6px; background: transparent; color: var(--muted); font-size: 9px; font-weight: 700; cursor: pointer; }
@@ -72,6 +81,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .panel { min-width: 0; padding: 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
 .panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; }
 .panel-heading h2 { margin: 0; font-family: Inter, sans-serif; font-size: 16px; font-weight: 600; letter-spacing: -.2px; }
+.chart-updated { color: var(--muted); font-size: 10px; text-align: right; }
 .chart-box { width: 100%; height: 225px; margin-top: 18px; }
 .chart-empty { display: grid; height: 225px; place-items: center; color: var(--muted); font-size: 11px; text-align: center; }
 .chart-legend { display: flex; justify-content: center; gap: 17px; padding-top: 10px; }
